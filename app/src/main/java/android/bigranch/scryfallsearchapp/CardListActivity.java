@@ -47,7 +47,7 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
     }
 
     private void testRetrofitRequest() {
-        mCardListViewModel.SearchCardAPI("Damnation");
+        mCardListViewModel.SearchCardAPI("Nature");
     }
 
     private void initRecyclerView(){
