@@ -7,6 +7,8 @@ import android.bigranch.scryfallsearchapp.util.Testing;
 import android.bigranch.scryfallsearchapp.viewmodels.CardListViewModel;
 import android.os.Bundle;
 
+
+import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,7 +31,7 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
         mCardListViewModel = new ViewModelProvider(this).get(CardListViewModel.class);
         initRecyclerView();
         subscribeObservers();
-        testRetrofitRequest();
+        initSearchView();
 
     }
 
@@ -38,10 +40,9 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
             @Override
             public void onChanged(List<Card> cards) {
                 if(cards != null) {
-                    Testing.printCards(cards, "Testing Card Print-Out");
+//                    Testing.printCards(cards, "Testing Card Print-Out");
                     mRecyclerAdapter.setCards(cards);
                 }
-
             }
         });
     }
@@ -62,8 +63,21 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
         mCardListViewModel.SearchCardAPI(query);
     }
 
-    private void TestRetrofitRequest() {
-        SearchCardAPI("Damnation");
+    private void initSearchView(){
+        final SearchView searchView = findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mCardListViewModel.SearchCardAPI(query);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
     @Override

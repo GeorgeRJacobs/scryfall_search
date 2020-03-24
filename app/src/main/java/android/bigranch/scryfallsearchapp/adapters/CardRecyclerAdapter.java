@@ -2,6 +2,7 @@ package android.bigranch.scryfallsearchapp.adapters;
 
 import android.bigranch.scryfallsearchapp.R;
 import android.bigranch.scryfallsearchapp.models.Card;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
+
+import retrofit2.http.Tag;
 
 public class CardRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -39,9 +42,12 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 .centerCrop()
                 .error(R.drawable.ic_launcher_background);
 
+        Log.d("TAG", mCards.get(position).getName());
+
         Glide.with(((CardViewHolder) holder).itemView)
                 .setDefaultRequestOptions(options)
                 .load(mCards.get(position).getImage_uris().getNormal())
+                .error(R.drawable.ic_launcher_background)
                 .into(((CardViewHolder) holder).image);
 
         ((CardViewHolder)holder).title.setText(mCards.get(position).getName());
