@@ -85,22 +85,22 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public void displayLoading() {
-        if(mCards != null) {
-            if (!isLoading()) {
-                Card card = new Card();
-                card.setName("LOADING...");
-                List<Card> loadingcard = new ArrayList<>();
-                loadingcard.add(card);
-                mCards = loadingcard;
-                notifyDataSetChanged();
-            }
+        if (!isLoading()) {
+            Card card = new Card();
+            card.setName("LOADING...");
+            List<Card> loadingcard = new ArrayList<>();
+            loadingcard.add(card);
+            mCards = loadingcard;
+            notifyDataSetChanged();
         }
     }
 
     private boolean isLoading() {
-        if(mCards.size() > 0) {
-            if(mCards.get(mCards.size() - 1).getName().equals("LOADING...")){
-                return true;
+        if(mCards != null) {
+            if (mCards.size() > 0) {
+                if (mCards.get(mCards.size() - 1).getName().equals("LOADING...")) {
+                    return true;
+                }
             }
         }
         return false;
