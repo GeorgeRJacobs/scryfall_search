@@ -1199,7 +1199,7 @@ public class Card implements Parcelable {
         this.artist_ids = artist_ids;
     }
 
-    Card() {}
+    public Card() {}
 
     @Override
     public String toString() {

@@ -13,11 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.http.Tag;
-
 public class CardRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private static final int CARD_TYPE = 1;
+    private static final int LOADING_TYPE = 2;
 
     private List<Card> mCards;
     private OnCardListener mOnCardListener;
@@ -29,30 +31,78 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.layout_card_list_item, parent, false
-        );
-        return new CardViewHolder(view, mOnCardListener);
+        View view = null;
+        switch(viewType) {
+            case CARD_TYPE: {
+                view = LayoutInflater.from(parent.getContext()).inflate(
+                        R.layout.layout_card_list_item, parent, false);
+                return new CardViewHolder(view, mOnCardListener);
+            }
+            case LOADING_TYPE: {
+                view = LayoutInflater.from(parent.getContext()).inflate(
+                        R.layout.layout_loading_list_item, parent, false);
+                return new LoadingViewHolder(view);
+            }
+            default: {
+                view = LayoutInflater.from(parent.getContext()).inflate(
+                        R.layout.layout_card_list_item, parent, false);
+                return new CardViewHolder(view, mOnCardListener);
+            }
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .error(R.drawable.ic_launcher_background);
+        int itemViewType = getItemViewType(position);
+        if(itemViewType == CARD_TYPE) {
+            RequestOptions options = new RequestOptions()
+                    .centerCrop()
+                    .error(R.drawable.ic_launcher_background);
 
-        Log.d("TAG", mCards.get(position).getName());
+            Log.d("TAG", mCards.get(position).getName());
 
-        Glide.with(((CardViewHolder) holder).itemView)
-                .setDefaultRequestOptions(options)
-                .load(mCards.get(position).getImage_uris().getNormal())
-                .error(R.drawable.ic_launcher_background)
-                .into(((CardViewHolder) holder).image);
+            Glide.with(((CardViewHolder) holder).itemView)
+                    .setDefaultRequestOptions(options)
+                    .load(mCards.get(position).getImage_uris().getNormal())
+                    .error(R.drawable.ic_launcher_background)
+                    .into(((CardViewHolder) holder).image);
 
-        ((CardViewHolder)holder).title.setText(mCards.get(position).getName());
-        ((CardViewHolder)holder).card_type.setText(mCards.get(position).getType_line());
-        ((CardViewHolder)holder).card_text.setText(mCards.get(position).getOracle_text());
+            ((CardViewHolder)holder).title.setText(mCards.get(position).getName());
+            ((CardViewHolder)holder).card_type.setText(mCards.get(position).getType_line());
+            ((CardViewHolder)holder).card_text.setText(mCards.get(position).getOracle_text());
+        }
+
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(mCards.get(position).getName().equals("LOADING...")) {
+            return LOADING_TYPE;
+        } else {
+            return CARD_TYPE;
+        }
+    }
+
+    public void displayLoading() {
+        if(!isLoading()) {
+            Card card = new Card();
+            card.setName("LOADING...");
+            List<Card> loadingcard = new ArrayList<>();
+            loadingcard.add(card);
+            mCards = loadingcard;
+            notifyDataSetChanged();
+
+        }
+    }
+
+    private boolean isLoading() {
+        if(mCards.size() > 0) {
+            if(mCards.get(mCards.size() - 1).getName().equals("LOADING...")){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

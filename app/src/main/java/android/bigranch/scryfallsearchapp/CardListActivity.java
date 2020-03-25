@@ -68,6 +68,7 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                mRecyclerAdapter.displayLoading();
                 mCardListViewModel.SearchCardAPI(query);
 
                 return false;
