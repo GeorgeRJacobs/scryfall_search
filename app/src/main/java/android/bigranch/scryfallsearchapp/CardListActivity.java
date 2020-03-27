@@ -4,6 +4,7 @@ import android.bigranch.scryfallsearchapp.adapters.CardRecyclerAdapter;
 import android.bigranch.scryfallsearchapp.adapters.OnCardListener;
 import android.bigranch.scryfallsearchapp.models.Card;
 import android.bigranch.scryfallsearchapp.util.Testing;
+import android.bigranch.scryfallsearchapp.util.VerticalSpacingItemDecorator;
 import android.bigranch.scryfallsearchapp.viewmodels.CardListViewModel;
 import android.os.Bundle;
 
@@ -44,8 +45,10 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
             @Override
             public void onChanged(List<Card> cards) {
                 if(cards != null) {
-//                    Testing.printCards(cards, "Testing Card Print-Out");
-                    mRecyclerAdapter.setCards(cards);
+                    if(mCardListViewModel.ismIsViewingCards()){
+                        //                    Testing.printCards(cards, "Testing Card Print-Out");
+                        mRecyclerAdapter.setCards(cards);
+                    }
                 }
             }
         });
@@ -60,6 +63,8 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
                 this
                 );
         mRecyclerView.setAdapter(mRecyclerAdapter);
+        VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(15);
+        mRecyclerView.addItemDecoration(itemDecorator);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
@@ -98,6 +103,16 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
 
     private void displaySearchCategories() {
         mCardListViewModel.setmIsViewingCards(false);
-        mRecyclerAdapter.displaySearchCategories();;
+        mRecyclerAdapter.displaySearchCategories();
     }
+
+    @Override
+    public void onBackPressed() {
+        if(mCardListViewModel.onBackPressed()) {
+            super.onBackPressed();
+        } else {
+            displaySearchCategories();
+        }
+    }
+
 }
