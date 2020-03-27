@@ -92,7 +92,8 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
 
     @Override
     public void onCategoryClick(String category) {
-
+        mRecyclerAdapter.displayLoading();
+        mCardListViewModel.SearchCardAPI(category);
     }
 
     private void displaySearchCategories() {
