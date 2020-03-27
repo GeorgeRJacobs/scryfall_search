@@ -29,6 +29,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public CardRecyclerAdapter(OnCardListener mOnCardListener) {
         this.mOnCardListener = mOnCardListener;
+        mCards = new ArrayList<>();
     }
 
     @NonNull
@@ -68,7 +69,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     .centerCrop()
                     .error(R.drawable.ic_launcher_background);
 
-            Log.d("TAG", mCards.get(position).getName());
+            //Log.d("TAG", mCards.get(position).getName());
 
             Glide.with(((CardViewHolder) holder).itemView)
                     .setDefaultRequestOptions(options)
@@ -91,7 +92,9 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             mCards.get(position).getObject()
             );
 
-            Glide.with(((CardViewHolder) holder).itemView)
+            //Log.d("TAG", path);
+
+            Glide.with(((CategoryViewHolder) holder).itemView)
                     .setDefaultRequestOptions(options)
                     .load(path)
                     .error(R.drawable.ic_launcher_background)
@@ -107,7 +110,6 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public int getItemViewType(int position) {
         if(mCards.get(position).getCmc() == -1){
             return CATEGORY_TYPE;
-
         }
         else if(mCards.get(position).getName().equals("LOADING...")) {
             return LOADING_TYPE;
@@ -142,13 +144,13 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         List<Card> categories = new ArrayList<>();
         for(int i=0; i < Constants.DEFAULT_SEARCH_CATEGORIES.length; i++) {
            Card card = new Card();
-           card.setName(Constants.DEFAULT_SEARCH_CATEGORY_IMAGES[i]);
+           card.setName(Constants.DEFAULT_SEARCH_CATEGORIES[i]);
            card.setObject(Constants.DEFAULT_SEARCH_CATEGORY_IMAGES[i]);
            card.setCmc(-1);
            categories.add(card);
-           mCards = categories;
-           notifyDataSetChanged();
         }
+        mCards = categories;
+        notifyDataSetChanged();
     }
 
     @Override

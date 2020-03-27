@@ -10,6 +10,6 @@ public class Constants {
             {"Instant", "Sorcery", "Creature", "Artifact", "Enchantment", "Planeswalker", "Land"};
 
     public static final String[] DEFAULT_SEARCH_CATEGORY_IMAGES = {
-            "Instant", "Sorcery", "Creature", "Artifact", "Enchantment", "Planeswalker", "Land"};
+            "instant", "sorcery", "creature", "artifact", "enchantment", "planeswalker", "land"};
 
 }

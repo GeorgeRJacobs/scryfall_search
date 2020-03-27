@@ -26,9 +26,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000"
+            android:text="Barbeque"
             android:layout_marginStart="20dp"
-            android:text="BBQ"
-            android:textSize="@+id/category_title"
+            android:textSize="20sp"
+            android:id="@+id/category_title"
             >
 
         </TextView>
