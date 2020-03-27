@@ -6,4 +6,10 @@ public class Constants {
 
     public static final int NETWORK_TIMEOUT = 3000;
 
+    public static final String[] DEFAULT_SEARCH_CATEGORIES =
+            {"Instant", "Sorcery", "Creature", "Artifact", "Enchantment", "Planeswalker", "Land"};
+
+    public static final String[] DEFAULT_SEARCH_CATEGORY_IMAGES = {
+            "Instant", "Sorcery", "Creature", "Artifact", "Enchantment", "Planeswalker", "Land"};
+
 }

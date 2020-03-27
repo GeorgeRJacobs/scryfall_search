@@ -32,6 +32,10 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
         initRecyclerView();
         subscribeObservers();
         initSearchView();
+        if(!mCardListViewModel.ismIsViewingCards()){
+            //Display
+            displaySearchCategories();
+        }
 
     }
 
@@ -89,5 +93,10 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
     @Override
     public void onCategoryClick(String category) {
 
+    }
+
+    private void displaySearchCategories() {
+        mCardListViewModel.setmIsViewingCards(false);
+        mRecyclerAdapter.displaySearchCategories();;
     }
 }

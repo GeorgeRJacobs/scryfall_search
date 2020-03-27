@@ -11,8 +11,10 @@ import java.util.List;
 public class CardListViewModel extends ViewModel {
 
     private CardRepository mCardRepository;
+    private boolean mIsViewingCards;
 
     public CardListViewModel() {
+        mIsViewingCards = false;
         mCardRepository = CardRepository.getInstance();
     }
 
@@ -22,6 +24,15 @@ public class CardListViewModel extends ViewModel {
     }
 
     public void SearchCardAPI(String query) {
+        mIsViewingCards = true;
         mCardRepository.SearchCardAPI(query);
+    }
+
+    public boolean ismIsViewingCards() {
+        return mIsViewingCards;
+    }
+
+    public void setmIsViewingCards(boolean isViewingCards){
+        mIsViewingCards = isViewingCards;
     }
 }

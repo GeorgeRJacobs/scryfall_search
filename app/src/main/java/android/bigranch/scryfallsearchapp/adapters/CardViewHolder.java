@@ -19,7 +19,6 @@ public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         super(itemView);
 
         this.onCardListener = onCardListener;
-
         title = itemView.findViewById(R.id.card_title);
         card_type = itemView.findViewById(R.id.card_type);
         card_text = itemView.findViewById(R.id.card_text);
