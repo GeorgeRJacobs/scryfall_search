@@ -2,7 +2,11 @@
 <resources>
     <dimen name="card_image_height">204dp</dimen>
     <dimen name="card_image_width">146dp</dimen>
+    <dimen name="card_image_height_large">280dp</dimen>
+    <dimen name="card_image_width_large">200dp</dimen>
     <dimen name="card_title_text_size">14sp</dimen>
+    <dimen name="card_title_text_size_large">26sp</dimen>
     <dimen name="card_publisher_text_size">14sp</dimen>
+    <dimen name="card_publisher_text_size_large">26sp</dimen>
     <dimen name="recycler_loading_view_height">80sp</dimen>
 </resources>
