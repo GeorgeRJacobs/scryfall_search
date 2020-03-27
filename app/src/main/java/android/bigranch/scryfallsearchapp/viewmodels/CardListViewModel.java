@@ -3,6 +3,7 @@ package android.bigranch.scryfallsearchapp.viewmodels;
 import android.bigranch.scryfallsearchapp.models.Card;
 import android.bigranch.scryfallsearchapp.repositories.CardRepository;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -47,6 +48,11 @@ public class CardListViewModel extends ViewModel {
     }
 
     public boolean onBackPressed() {
+        if(mIsPerformingQuery){
+            // cancel the query
+            mCardRepository.cancelRequest();
+            mIsPerformingQuery = false;
+        }
         if(mIsViewingCards) {
             mIsViewingCards = false;
             return false;

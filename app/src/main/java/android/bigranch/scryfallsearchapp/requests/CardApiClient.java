@@ -104,4 +104,9 @@ public class CardApiClient {
         }
     }
 
+    public void cancelRequest() {
+        if(mRetrieveCardsRunnable != null) {
+            mRetrieveCardsRunnable.cancelRequest();
+        }
+    }
 }

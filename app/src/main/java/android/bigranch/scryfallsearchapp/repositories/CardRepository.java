@@ -33,4 +33,8 @@ public class CardRepository {
     public void SearchCardAPI(String query) {
         mCardApiClient.searchCardAPI(query);
     }
+
+    public void cancelRequest() {
+        mCardApiClient.cancelRequest();
+    }
 }

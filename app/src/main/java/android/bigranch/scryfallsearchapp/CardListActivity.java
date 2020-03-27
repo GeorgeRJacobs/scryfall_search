@@ -23,12 +23,14 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
     private CardListViewModel mCardListViewModel;
     private RecyclerView mRecyclerView;
     private CardRecyclerAdapter mRecyclerAdapter;
+    private SearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_list);
         mRecyclerView = findViewById(R.id.card_list);
+        mSearchView = findViewById(R.id.search_view);
         mCardListViewModel = new ViewModelProvider(this).get(CardListViewModel.class);
         initRecyclerView();
         subscribeObservers();
@@ -47,7 +49,9 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
                 if(cards != null) {
                     if(mCardListViewModel.ismIsViewingCards()){
                         //                    Testing.printCards(cards, "Testing Card Print-Out");
+                        mCardListViewModel.setmIsPerformingQuery(false);
                         mRecyclerAdapter.setCards(cards);
+
                     }
                 }
             }
@@ -73,13 +77,13 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
     }
 
     private void initSearchView(){
-        final SearchView searchView = findViewById(R.id.search_view);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 mRecyclerAdapter.displayLoading();
                 mCardListViewModel.SearchCardAPI(query);
-
+                mSearchView.clearFocus();
                 return false;
             }
 
@@ -104,6 +108,7 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
     private void displaySearchCategories() {
         mCardListViewModel.setmIsViewingCards(false);
         mRecyclerAdapter.displaySearchCategories();
+        mSearchView.clearFocus();
     }
 
     @Override
