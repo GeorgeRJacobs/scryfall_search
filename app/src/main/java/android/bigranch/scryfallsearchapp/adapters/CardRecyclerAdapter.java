@@ -23,6 +23,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private static final int CARD_TYPE = 1;
     private static final int LOADING_TYPE = 2;
     private static final int CATEGORY_TYPE = 3;
+    //private OnItemClickListener mlistener;
 
     private List<Card> mCards;
     private OnCardListener mOnCardListener;
@@ -174,4 +175,12 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
         return null;
     }
+
+//    public interface OnItemClickListener {
+//        void onItemClick(Card card);
+//    }
+//
+//    public void setOnItemClickListener(OnItemClickListener listener) {
+//        this.mlistener = listener;
+//    }
 }
