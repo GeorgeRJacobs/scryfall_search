@@ -6,6 +6,7 @@ import android.bigranch.scryfallsearchapp.models.Card;
 import android.bigranch.scryfallsearchapp.util.Testing;
 import android.bigranch.scryfallsearchapp.util.VerticalSpacingItemDecorator;
 import android.bigranch.scryfallsearchapp.viewmodels.CardListViewModel;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -101,6 +102,9 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
 
     @Override
     public void onCardClick(int position) {
+        Intent intent = new Intent(this, CardActivity.class);
+        intent.putExtra("card", mRecyclerAdapter.getSelectCard(position));
+        startActivity(intent);
 
     }
 

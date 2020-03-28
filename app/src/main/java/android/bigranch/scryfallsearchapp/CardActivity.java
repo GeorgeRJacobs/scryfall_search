@@ -2,6 +2,7 @@ package android.bigranch.scryfallsearchapp;
 
 import android.bigranch.scryfallsearchapp.models.Card;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
 public class CardActivity extends BaseActivity {
+    private static final String TAG = "CardActivity";
 
     //UI Components
     private AppCompatImageView mCardImage;
@@ -34,6 +36,7 @@ public class CardActivity extends BaseActivity {
     private void getIncomingIntent() {
         if(getIntent().hasExtra("card")){
             Card card = getIntent().getParcelableExtra("card");
+            Log.d(TAG, "getIncomingIntent: " + card.getName());
         }
     }
 }

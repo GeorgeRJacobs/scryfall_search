@@ -165,4 +165,13 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         mCards = cards;
         notifyDataSetChanged();
     }
+
+    public Card getSelectCard(int position) {
+        if(mCards != null){
+            if(mCards.size() > 0) {
+                return mCards.get(position);
+            }
+        }
+        return null;
+    }
 }
