@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/parent"
-    android:visibility="visible">
+    android:visibility="gone">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/card_image_act"
             android:layout_width="@dimen/card_image_width_large"
             android:layout_height="@dimen/card_image_height_large"
-            android:scaleType="centerInside"
+            android:layout_marginStart="10dp"
             android:adjustViewBounds="true"
-            android:layout_marginStart="5dp"
+            android:scaleType="centerInside"
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="2dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="10dp"
             android:divider="?android:listDivider"
             android:dividerPadding="2.5dp"
             android:orientation="vertical"
@@ -40,58 +40,34 @@
             app:layout_constraintStart_toEndOf="@+id/card_image_act"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:id="@+id/card_title_act"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/card_title_act"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:textSize="@dimen/card_title_text_size_large"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/card_price_act"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"></TextView>
-
-                <TextView
-                    android:id="@+id/card_price_act"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </TextView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="wrap_content"
+                android:text="Card Title"
+                android:textSize="@dimen/card_title_text_size"
+                android:textStyle="bold"></TextView>
 
             <TextView
                 android:id="@+id/card_type_act"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/card_publisher_text_size_large">
-
-            </TextView>
+                android:text="Card Type"
+                android:textSize="@dimen/card_publisher_text_size"></TextView>
+            <TextView
+                android:id="@+id/card_price_act"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TCG Mid Price: $25.00"
+                android:textSize="@dimen/card_publisher_text_size"></TextView>
 
             <TextView
                 android:id="@+id/card_text_act"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/card_publisher_text_size_large">
-
-            </TextView>
-
-            <TextView
-                android:id="@+id/card_oracle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/card_publisher_text_size_large">
-
-            </TextView>
+                android:text="Destroy all Creatures for Example"
+                android:textSize="@dimen/card_publisher_text_size"></TextView>
         </LinearLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

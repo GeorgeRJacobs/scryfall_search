@@ -49,6 +49,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/card_title_text_size"
                     android:textStyle="bold"
+                    android:text="Card Title"
                     android:id="@+id/card_title">
                 </TextView>
 
@@ -56,12 +57,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/card_publisher_text_size"
+                    android:text="Card Type"
                     android:id="@+id/card_type">
                 </TextView>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/card_publisher_text_size"
+                    android:text="Destroy all Creature for Example"
                     android:id="@+id/card_text">
                 </TextView>
             </LinearLayout>
