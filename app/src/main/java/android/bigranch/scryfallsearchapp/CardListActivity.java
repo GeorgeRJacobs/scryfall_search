@@ -8,6 +8,7 @@ import android.bigranch.scryfallsearchapp.util.VerticalSpacingItemDecorator;
 import android.bigranch.scryfallsearchapp.viewmodels.CardListViewModel;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -57,9 +58,25 @@ public class CardListActivity extends BaseActivity implements OnCardListener {
                         //                    Testing.printCards(cards, "Testing Card Print-Out");
                         mCardListViewModel.setmIsPerformingQuery(false);
                         mRecyclerAdapter.setCards(cards);
+                        mCardListViewModel.setmDidRetrieveCard(true);
 
                     }
                 }
+            }
+        });
+        mCardListViewModel.isCardRequestTimedOut().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean && !mCardListViewModel.didRetrieveCard()) {
+                    Log.d(TAG, "onChanged: timed out...");
+                }
+            }
+        });
+
+        mCardListViewModel.isQueryExhausted().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean) Log.d(TAG, "Query is Exhausted");
             }
         });
     }

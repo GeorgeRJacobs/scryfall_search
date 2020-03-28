@@ -13,11 +13,13 @@ public class CardListViewModel extends ViewModel {
 
     private CardRepository mCardRepository;
     private boolean mIsViewingCards;
+    private boolean mDidRetrieveCard;
     private boolean mIsPerformingQuery;
 
     public CardListViewModel() {
         mCardRepository = CardRepository.getInstance();
         mIsPerformingQuery = false;
+        mDidRetrieveCard = false;
     }
 
     public void setmIsPerformingQuery(boolean IsPerformingQuery) {
@@ -31,6 +33,10 @@ public class CardListViewModel extends ViewModel {
     // Train of Live Data
     public LiveData<List<Card>> getCards() {
         return mCardRepository.getCards();
+    }
+
+    public LiveData<Boolean> isCardRequestTimedOut() {
+        return mCardRepository.isCardRequestTimedOut();
     }
 
     public void SearchCardAPI(String query) {
@@ -58,5 +64,17 @@ public class CardListViewModel extends ViewModel {
             return false;
         }
         return true;
+    }
+
+    public void setmDidRetrieveCard(boolean retrieveCard){
+        mDidRetrieveCard = retrieveCard;
+    }
+
+    public boolean didRetrieveCard() {
+        return mDidRetrieveCard;
+    }
+
+    public LiveData<Boolean> isQueryExhausted() {
+        return mCardRepository.isQueryExhausted();
     }
 }

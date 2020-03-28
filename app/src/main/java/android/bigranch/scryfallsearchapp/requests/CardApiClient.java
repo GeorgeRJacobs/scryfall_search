@@ -25,6 +25,7 @@ public class CardApiClient {
     private static CardApiClient instance;
     private MutableLiveData<List<Card>> mCards;
     private RetrieveCardRunnable mRetrieveCardsRunnable;
+    private MutableLiveData<Boolean> mCardRequestTimeout = new MutableLiveData<>();
 
     public static CardApiClient getInstance() {
         if(instance == null) {
@@ -42,6 +43,10 @@ public class CardApiClient {
         return mCards;
     }
 
+    public LiveData<Boolean> isCardRequestTimedOut() {
+        return mCardRequestTimeout;
+    }
+
     public void searchCardAPI(String query) {
 
         if(mRetrieveCardsRunnable!= null) {
@@ -55,6 +60,7 @@ public class CardApiClient {
             @Override
             public void run() {
                 // Let the user know its timed out
+                mCardRequestTimeout.postValue(true);
                 handler.cancel(true);
             }
         }, NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);

@@ -58,6 +58,7 @@ public class CardActivity extends BaseActivity {
             mCardTitle.setText(card.getName());
             mCardType.setText(card.getType_line());
             mCardText.setText(card.getOracle_text());
+            Log.d(TAG, card.getPrices().getUsd());
             mCardPrice.setText("TCG Market Price: $ " + card.getPrices().getUsd());
             showProgressBar(false);
             showParent();
@@ -75,4 +76,5 @@ public class CardActivity extends BaseActivity {
     private void showParent(){
         mScrollview.setVisibility(View.VISIBLE);
     }
+
 }
